@@ -93,11 +93,11 @@ test "lex" {
         \\)
     ;
     const expected = [_]Lexer.Token{
-        .{ .kind = .Syntax, .value = &[_]u8{'('} },
-        .{ .kind = .Ident, .value = &[_]u8{'+'} },
-        .{ .kind = .Number, .value = &[_]u8{ '2', '1' } },
-        .{ .kind = .Number, .value = &[_]u8{'4'} },
-        .{ .kind = .Syntax, .value = &[_]u8{')'} },
+        .{ .kind = .Syntax, .value = "(" },
+        .{ .kind = .Ident, .value = "+" },
+        .{ .kind = .Number, .value = "21" },
+        .{ .kind = .Number, .value = "4" },
+        .{ .kind = .Syntax, .value = ")" },
     };
 
     var lexer = Lexer.init(source);
