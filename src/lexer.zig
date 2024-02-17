@@ -25,7 +25,7 @@ pub const Lexer = struct {
     pub fn eof(self: *Lexer) bool {
         return self.token == 0;
     }
-    pub fn next(self: *Lexer) !Lexer.Token {
+    pub fn next(self: *Lexer) Lexer.Token {
         while (std.ascii.isWhitespace(self.token)) {
             self.read();
         }
@@ -98,7 +98,7 @@ test "lex" {
 
     var lexer = Lexer.init(source);
     for (expected) |token| {
-        const tok = try lexer.next();
+        const tok = lexer.next();
         try std.testing.expectEqualDeep(token, tok);
     }
 }

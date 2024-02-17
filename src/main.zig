@@ -12,7 +12,7 @@ pub fn main() !void {
             if (line.len < 1) break;
             var lex = lexer.Lexer.init(line);
             while (!lex.eof()) {
-                const token = try lex.next();
+                const token = lex.next();
                 std.debug.print("{}\n", .{token});
             }
         }
