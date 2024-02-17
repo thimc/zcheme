@@ -6,7 +6,7 @@ pub const Lexer = struct {
     read_position: u8 = 0,
     token: u8 = 0,
 
-    const TokenType = enum { EOF, Syntax, Number, Identifier };
+    const TokenType = enum { Syntax, Number, Identifier };
     const Token = struct {
         value: []const u8,
         kind: TokenType,
@@ -47,7 +47,6 @@ pub const Lexer = struct {
                     .kind = TokenType.Number,
                 };
             },
-            0 => .{ .value = undefined, .kind = TokenType.EOF },
             else => {
                 while (!std.ascii.isWhitespace(self.peek()) and self.peek() != ')' and self.peek() != 0) {
                     self.read();
@@ -63,11 +62,8 @@ pub const Lexer = struct {
     }
 
     fn peek(self: *Lexer) u8 {
-        if (self.position >= self.source.len) {
-            return 0;
-        } else {
-            return self.source[self.position];
-        }
+        if (self.position >= self.source.len) return 0;
+        return self.source[self.position];
     }
     fn read(self: *Lexer) void {
         if (self.read_position >= self.source.len) {
